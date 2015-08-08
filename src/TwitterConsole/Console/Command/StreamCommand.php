@@ -25,7 +25,5 @@ class StreamCommand extends Command
         $tag = $input->getArgument('tag');
 
         $output->writeln($tag);
-        $climate = new League\CLImate\CLImate;
-        $climate->draw('404');
     }
 }
