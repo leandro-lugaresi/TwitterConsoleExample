@@ -1,0 +1,22 @@
+{
+    "require": {
+        "symfony/console": "~2.7",
+        "league/climate": "~3.1",
+        "fennb/phirehose": "^1.0",
+        "videlalvaro/php-amqplib": "^2.5",
+        "vlucas/phpdotenv": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8",
+        "phploc/phploc": "~2.0",
+        "pdepend/pdepend": "~2.0",
+        "phpmd/phpmd": "~2.0",
+        "squizlabs/php_codesniffer": "~1.5",
+        "sebastian/phpcpd": "~2.0"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "TwitterConsole" : "src"
+        }
+    }
+}
