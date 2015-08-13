@@ -7,9 +7,18 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TwitterConsole\Stream\TweetStream;
 
 class StreamCommand extends Command
 {
+    private $stream;
+
+    public function __construct(\OauthPhirehose $stream, $name = null)
+    {
+        $this->stream = $stream;
+        parent::__construct($name);
+    }
+
     protected function configure()
     {
         $this->setName('twitter:stream')
@@ -20,10 +29,12 @@ class StreamCommand extends Command
                 'The hashtag dude!'
             );
     }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $tag = $input->getArgument('tag');
 
-        $output->writeln($tag);
+        $this->stream->setTrack(array('#'.$tag));
+        $this->stream->consume();
     }
 }

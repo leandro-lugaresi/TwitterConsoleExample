@@ -1,0 +1,9 @@
+imports:
+- { resource: parameters.yml }
+- { resource: services.yml }
+
+parameters:
+  application:
+    version: 0.1
+    name:         CLI to get realtime tweets
+    description:  "Basic CLI to get realtime tweets and send to clients"

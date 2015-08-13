@@ -1,0 +1,5 @@
+parameters:
+        twitter.consumer_key: ""
+        twitter.consumer_secret: ""
+        twitter.oauth_token: ""
+        twitter.oauth_secret: ""

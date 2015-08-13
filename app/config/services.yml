@@ -1,0 +1,15 @@
+parameters:
+    twitter_console.stream.tweet_stream.class: TwitterConsole\Stream\TweetStream
+    twitter_console.console.command.stream_command.class: TwitterConsole\Console\Command\StreamCommand
+
+services:
+    twitter_console.stream.tweet_stream:
+        class: %twitter_console.stream.tweet_stream.class%
+        arguments:
+            - %twitter.oauth_token%
+            - %twitter.oauth_secret%
+            - %twitter.consumer_key%
+            - %twitter.consumer_secret%
+    twitter_console.console.command.stream_command:
+        class: %twitter_console.console.command.stream_command.class%
+        arguments: [@twitter_console.stream.tweet_stream]
