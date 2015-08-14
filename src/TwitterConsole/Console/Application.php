@@ -7,6 +7,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use OldSound\RabbitMqBundle\DependencyInjection\OldSoundRabbitMqExtension;
+use OldSound\RabbitMqBundle\DependencyInjection\Compiler\RegisterPartsPass;
 use TwitterConsole\Console\Command\StreamCommand;
 
 class Application extends BaseApplication
@@ -16,6 +18,8 @@ class Application extends BaseApplication
     {
         // create and populate the container
         $this->container = new ContainerBuilder();
+        $this->container->registerExtension(new OldSoundRabbitMqExtension());
+        $this->container->addCompilerPass(new RegisterPartsPass());
         // some useful paths
         $paths = array();
         $paths['root'] = __DIR__ . '/../../../';

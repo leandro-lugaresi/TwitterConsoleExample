@@ -1,15 +1,15 @@
 {
     "require": {
-        "symfony/console": "~2.7",
-        "symfony/yaml":                    "~2.7",
-	    "symfony/config":                  "~2.7",
-	    "symfony/dependency-injection":    "~2.7",
-        "symfony/filesystem":              "~2.7",
-	    "symfony/finder":                  "~2.7",
-        "league/climate": "~3.1",
-        "fennb/phirehose": "^1.0",
-        "videlalvaro/php-amqplib": "^2.5",
-        "vlucas/phpdotenv": "^2.0"
+        "symfony/console":                      "~2.7",
+        "symfony/yaml":                         "~2.7",
+	    "symfony/config":                       "~2.7",
+	    "symfony/dependency-injection":         "~2.7",
+        "symfony/filesystem":                   "~2.7",
+        "symfony/finder":                       "~2.7",
+        "league/climate":                       "~3.1",
+        "fennb/phirehose":                      "^1.0",
+        "oldsound/rabbitmq-bundle":             "~1.6",
+        "incenteev/composer-parameter-handler": "~2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",
@@ -22,6 +22,27 @@
     "autoload" : {
         "psr-0" : {
             "TwitterConsole" : "src"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ]
+    },
+    "extra": {
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "mongodb_uri": "MONGODB_URI",
+                "rabbit_host": "RABBITMQ_HOST",
+                "rabbit_port": "RABBITMQ_PORT",
+                "rabbit_user": "RABBITMQ_USER",
+                "rabbit_pass": "RABBITMQ_PASS",
+                "rabbit_vhost": "RABBITMQ_VHOST"
+            }
         }
     }
 }
