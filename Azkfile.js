@@ -26,7 +26,7 @@ systems({
     },
     envs: {
       // set instances variables
-      APP_DIR: "/azk/#{manifest.dir}",
+      APP_DIR: "/azk/#{manifest.dir}/web",
     },
   },
   mongodb: {
@@ -81,20 +81,4 @@ systems({
         RABBITMQ_VHOST: "/"
     },
   },
-  // "mongo-express": {
-  //   image: {"docker": "knickers/mongo-express"},
-  //   depends: ["mongodb"],
-  //   provision: [],
-  //   shell: "/bin/bash",
-  //   wait: {"retry": 25, "timeout": 1000},
-  //   ports: {
-  //     http: "81/tcp",
-  //   },
-  //   http: {
-  //     // mongodb.azk.dev
-  //     domains: [ "#{manifest.dir}-#{system.name}.#{azk.default_domain}" ],
-  //   },
-  //   envs: {
-  //   },
-  // }
 });

@@ -64,8 +64,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
-# Configure nginx root with sample app
-ADD sample/ /var/www/public
 
 EXPOSE 80
 CMD ["/run.sh"]
