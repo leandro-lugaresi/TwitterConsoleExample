@@ -4,7 +4,7 @@ systems({
     // Dependent systems
     depends: ["mongodb", "rabbitmq"], // postgres, mysql, mongodb ...
     // More images:  http://images.azk.io
-    image: {"docker": "azukiapp/php-fpm"},
+    image: {dockerfile: './docker'},
     // Steps to execute before running instances
     provision: [
       "composer install",
