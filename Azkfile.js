@@ -13,7 +13,7 @@ systems({
     shell: "/bin/bash",
     wait: {"retry": 20, "timeout": 1000},
     mounts: {
-      '/azk/#{manifest.dir}': sync("./twitterConsumer"),
+      '/azk/#{manifest.dir}': sync("."),
     },
     scalable: {"default": 1},
     http: {
@@ -39,7 +39,7 @@ systems({
       '/data/db': persistent('mongodb-#{manifest.dir}'),
     },
     ports: {
-      http: "28017:28017/tcp",
+      http: "28017/tcp",
     },
     http: {
       // mongodb.azk.dev
@@ -60,8 +60,8 @@ systems({
       '/var/lib/rabbitmq': persistent("#{system.name}-#{manifest.dir}"),
     },
     ports: {
-      http: "15672:15672/tcp",
-      amqp: "5672:5672"
+      http: "15672",
+      amqp: "5672"
     },
     http: {
       // mongodb.azk.dev
