@@ -14,6 +14,7 @@ systems({
     wait: {"retry": 20, "timeout": 1000},
     mounts: {
       '/azk/#{manifest.dir}': sync("."),
+      '/azk/#{manifest.dir}/vendor': persistent('vendor-#{manifest.dir}'),
     },
     scalable: {"default": 1},
     http: {
@@ -64,7 +65,7 @@ systems({
       domains: [ "#{manifest.dir}-#{system.name}.#{azk.default_domain}" ],
     },
     export_envs: {
-      MONGODB_URI: "mongodb://#{net.host}:#{net.port[27017]}/#{manifest.dir}_development",
+      MONGODB_URI: "mongodb://#{net.host}:#{net.port[27017]}",
       MONGO_PORT: "#{net.port[27017]}",
       MONGO_HOST: "#{net.host}",
     },
