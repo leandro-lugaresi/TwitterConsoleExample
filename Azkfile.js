@@ -1,10 +1,10 @@
 // Adds the systems that shape your system
 systems({
-  "twitter-consumer": {
+  "twitter-application": {
     // Dependent systems
     depends: ["mongodb", "rabbitmq"], // postgres, mysql, mongodb ...
     // More images:  http://images.azk.io
-    image: {dockerfile: './docker'},
+    image: {dockerfile: './docker/php-fpm'},
     // Steps to execute before running instances
     provision: [
       "composer install",
@@ -27,6 +27,24 @@ systems({
     envs: {
       // set instances variables
       APP_DIR: "/azk/#{manifest.dir}/web",
+    },
+  },
+  "twitter-consumer": {
+    // Dependent systems
+    depends: ["mongodb", "rabbitmq"],
+    image: {dockerfile: './docker/php-cli'},
+    provision: [
+      "composer install",
+    ],
+    workdir: "/azk/#{manifest.dir}",
+    shell: "/bin/bash",
+    mounts: {
+      '/azk/#{manifest.dir}': sync("."),
+    },
+    scalable: {"default": 1},
+    envs: {
+      // set instances variables
+      APP_DIR: "/azk/#{manifest.dir}",
     },
   },
   mongodb: {

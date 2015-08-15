@@ -23,8 +23,9 @@
         "sebastian/phpcpd": "~2.0"
     },
     "autoload" : {
-        "psr-0" : {
-            "TwitterConsole" : "src"
+        "psr-4" : {
+            "TwitterConsole\\": "src/TwitterConsole",
+            "Application\\" : "src/Application"
         }
     },
     "scripts": {

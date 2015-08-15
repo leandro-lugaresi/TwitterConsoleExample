@@ -4,6 +4,7 @@ parameters:
         twitter.oauth_token: ""
         twitter.oauth_secret: ""
         mongodb_uri: ""
+        mongodb_database: "twitter"
         rabbit_host: ""
         rabbit_port: ""
         rabbit_user: ""
