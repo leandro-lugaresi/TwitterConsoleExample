@@ -22,19 +22,14 @@ class StreamCommand extends Command
     protected function configure()
     {
         $this->setName('twitter:stream')
-            ->setDescription('This command will get data from Twitter Stream API')
-            ->addArgument(
-                'tag',
-                InputArgument::OPTIONAL,
-                'The hashtag dude!'
-            );
+            ->setDescription('This command will get data from Twitter Stream API');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $tag = $input->getArgument('tag');
 
-        $this->stream->setTrack(array('#'.$tag));
+        $this->stream->setTrack(array('leandrolugaresi'));
         $this->stream->consume();
     }
 }

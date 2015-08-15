@@ -18,7 +18,8 @@ class Application extends BaseApplication
     {
         // create and populate the container
         $this->container = new ContainerBuilder();
-        $this->container->registerExtension(new OldSoundRabbitMqExtension());
+        $extension = new OldSoundRabbitMqExtension();
+        $this->container->registerExtension($extension);
         $this->container->addCompilerPass(new RegisterPartsPass());
         // some useful paths
         $paths = array();
@@ -28,9 +29,14 @@ class Application extends BaseApplication
         // the main config
         $loader = new YamlFileLoader($this->container, new FileLocator($paths['config']));
         $loader->load('config.yml');
+        //Compiler
+        $this->container->loadFromExtension($extension->getAlias());
+        $this->container->compile();
+
         // construct the application
         $app = $this->container->getParameter('application');
         parent::__construct($app['name'], $app['version']);
+        $this->container->get('old_sound_rabbit_mq.connection.default');
         // and add commands to it
         $this->addConsoleCommands();
     }

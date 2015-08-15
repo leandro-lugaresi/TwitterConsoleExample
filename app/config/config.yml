@@ -1,6 +1,7 @@
 imports:
 - { resource: parameters.yml }
 - { resource: services.yml }
+
 old_sound_rabbit_mq:
     connections:
         default:
@@ -22,12 +23,6 @@ old_sound_rabbit_mq:
         new_tweets:
             connection:       default
             exchange_options: {name: 'new-tweets', type: direct}
-    consumers:
-        notify_clients:
-            connection:       default
-            exchange_options: {name: 'new-tweets', type: direct}
-            queue_options:    {name: 'new-tweets'}
-            callback:         
 
 parameters:
   application:

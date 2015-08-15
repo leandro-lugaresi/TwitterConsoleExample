@@ -1,6 +1,8 @@
 parameters:
     twitter_console.stream.tweet_stream.class: TwitterConsole\Stream\TweetStream
     twitter_console.console.command.stream_command.class: TwitterConsole\Console\Command\StreamCommand
+    application_model_hashytags.class: Application\Model\Hashtags
+    mongo.client.class: MongoClient
 
 services:
     twitter_console.stream.tweet_stream:
@@ -10,6 +12,20 @@ services:
             - %twitter.oauth_secret%
             - %twitter.consumer_key%
             - %twitter.consumer_secret%
+            - @old_sound_rabbit_mq.new_tweets_producer
+            - @application_model_hashytags
     twitter_console.console.command.stream_command:
         class: %twitter_console.console.command.stream_command.class%
         arguments: [@twitter_console.stream.tweet_stream]
+    application_model_hashytags:
+        class: %application_model_hashytags.class%
+        arguments: [@mongodb]
+    mongo_client:
+        class : %mongo.client.class%
+        arguments: [%mongodb_uri%]
+    mongodb:
+        class:   MongoDB
+        factory: [Application\Factory\MongoDBFactory, createMongoDB]
+        arguments:
+            - @mongo_client
+            - %mongodb_database%
